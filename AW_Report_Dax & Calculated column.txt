@@ -1,0 +1,55 @@
+Aw_Report_used all dax and calculated column
+
+•	Current Age = DATEDIFF(AW_Customer_Lookup[BirthDate],TODAY(),YEAR)
+•	Day Of Week = WEEKDAY(AW_Calendar_Lookup[Date],1)
+•	parent = IF(AW_Customer_Lookup[TotalChildren]>0,"Yes","No")
+•	Weekend = IF(OR(AW_Calendar_Lookup[Day Of Week]=6,AW_Calendar_Lookup[Start of Week]=7), "Weekend", "Weekday")
+•	Weekend = IF(AW_Calendar_Lookup[Day Of Week]=6 || AW_Calendar_Lookup[Start of Week]=7, "Weekend", "Weekday")
+•	FullName_CC = AW_Customer_Lookup[Prefix] & AW_Customer_Lookup[FirstName] & AW_Customer_Lookup[LastName]
+•	FullName_CC = AW_Customer_Lookup[Prefix] & " " & AW_Customer_Lookup[FirstName] & " " & AW_Customer_Lookup[LastName]
+•	Short Month = left(AW_Calendar_Lookup[Month Name],3)
+•	Short Month = UPPER(left(AW_Calendar_Lookup[Month Name],3))
+•	RetailPrice = RELATED(AW_Products_Lookup[ProductPrice])
+•	Revenue = Aw_Sales[RetailPrice]*Aw_Sales[OrderQuantity]
+•	Quantity Returned = SUM(AW_Returns[ReturnQuantity])		
+•	Total Revenue = SUM(Aw_Sales[Revenue])
+•	Return Rate = [Quantity Returned] / [Quantity Sold]
+•	Return Rate = DIVIDE([Quantity Returned],[Quantity Sold], "No Sales")
+•	Avg Retail Price = AVERAGE(AW_Products_Lookup[ProductPrice])
+•	Total Returns = COUNTROWS(AW_Returns)
+•	Total Returns = COUNTA(AW_Returns[ReturnQuantity])
+•	Total Orders = DISTINCTCOUNT(Aw_Sales[OrderNumber])
+•	Bulk Orders = CALCULATE([Total Orders],Aw_Sales[OrderQuantity],>1)
+•	Weekend Orders = CALCULATE([Total Orders],AW_Calendar_Lookup[Weekend]="weekend")
+•	ALL Orders = CALCULATE([Total Orders],ALL(Aw_Sales))
+•	% of All Orders = [Total Orders]/[ALL Orders]
+•	Overall Avg Price = CALCULATE([Avg Retail Price],ALL(AW_Products_Lookup))
+•	Hight Ticket Orders = CALCULATE([Total Orders],AW_Products_Lookup[ProductPrice] > 714.44)
+•	Hight Ticket Orders = CALCULATE([Total Orders],FILTER(AW_Products_Lookup,AW_Products_Lookup[ProductPrice]>[Overall Avg Price]))
+•	Total Revenue = SUMX(Aw_Sales,Aw_Sales[OrderQuantity] * RELATED(AW_Products_Lookup[ProductPrice]))
+•	YTD Revenue = calculate([Total Revenue],DATESYTD(AW_Calendar_Lookup[Date]))
+•	Prev Month Revenue = CALCULATE([Total Revenue],DATEADD(AW_Calendar_Lookup[Date],-1,MONTH))
+•	Revenue Target = [Prev Month Revenue]*1.1
+•	10-Day Rolling Revenue = CALCULATE([Total Revenue], DATESINPERIOD(AW_Calendar_Lookup[Date], MAX(AW_Calendar_Lookup[Date]),-10,DAY))
+
+•	Customer Priority = IF(AW_Customer_Lookup[Current Age]<50 && AW_Customer_Lookup[AnnualIncome]>100000, "priority","Standard")
+•	Price Point=IF(AW_Products_Lookup[ProductPrice]>500 ,"High",IF(AW_Products_Lookup[ProductPrice]>100,"Mid Range","Low")
+•	Short Day = left(AW_Calendar_Lookup[Day Name],3)
+•	Short Day = UPPER(left(AW_Calendar_Lookup[Day Name],3))
+•	SKU Category = left(AW_Products_Lookup[ProductSKU],2)
+•	SKU Category = left(AW_Products_Lookup[ProductSKU],SEARCH("-",AW_Products_Lookup[ProductSKU])-1)
+
+•	Product Models = DISTINCT(AW_Products_Lookup[ModelName])
+•	ALL Returns=CALCULATE([Total Returns],ALL(AW_Returns))
+•	% of All Returns = [Total Returns]/[ALL Returns]
+•	Total Cost = SUMX(Aw_Sales,Aw_Sales[OrderQuantity] * RELATED(AW_Products_Lookup[ProductCost]))
+•	Total Profit = [Total Revenue]-[Total Cost]
+•	Prev Month Orders = CALCULATE([Total Orders],DATEADD(AW_Calendar_Lookup[Date],-1,MONTH))
+•	Order Target = [Prev Month Orders]*1.1
+•	Prev Month Returns = CALCULATE([Total Returns],DATEADD(AW_Calendar_Lookup[Date],-1,MONTH))
+•	90-day Rolling Profit = CALCULATE([Total Profit],DATESINPERIOD(AW_Calendar_Lookup[Date],MAX(AW_Calendar_Lookup[Date]),-90,DAY))
+•	Adjusted Revenue = SUMX(Aw_Sales,Aw_Sales[OrderQuantity] * [Adjusted Price])
+•	Adjusted Profit = [Adjusted Revenue]- [Total Cost]
+
+
+
