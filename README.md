@@ -1,4 +1,4 @@
 # Adventure-Work-Report_PowerBI
-# Earned certification in “Microsoft Power BI Desktop for Business Intelligence” from Udemy.With this course performed this hands-on project.
-# The program included 11 hours of hands-on learning with an end-to-end business intelligence solution and an Adventure Works dashboard with AI Visuals to track KPIs (Revenue, Sales, Profit and Return) and compare regional performance, product level trends, and forecasts.
-# Followed Data Modeling,Dax Measures,Calculated Column.
+# Certified in Udemy's “Microsoft Power BI Desktop for Business Intelligence” course.This hands-on project was completed as part of this course.
+# 11 hours were devoted to practical instruction on how to use an all-encompassing business intelligence solution and an Adventure Works dashboard equipped with AI visuals to monitor key performance indicators (KPIs) such as revenue, sales, profit, and return, as well as to evaluate and compare regional performance, product level trends, and forecasts.
+# Followed data cleansing and shaping techniques such as Dax Measures, calculated columns, and data modeling.
